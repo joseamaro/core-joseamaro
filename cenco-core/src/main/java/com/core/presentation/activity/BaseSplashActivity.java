@@ -34,7 +34,7 @@ public abstract class BaseSplashActivity<BINDER extends ViewDataBinding> extends
     protected abstract int getSplashTime();
 
     @Override protected void startActivity(Class activityClass) {
-        finish();
         super.startActivity(activityClass);
+        finish();
     }
 }
