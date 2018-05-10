@@ -5,7 +5,7 @@ package com.core.data.entity.response;
  */
 
 public class ResponseBaseEntity<T> {
-    public String status;
+    public String internalCode;
     public String message;
-    public T data;
+    public T payload;
 }
