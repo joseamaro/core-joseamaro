@@ -49,6 +49,22 @@ public abstract class Preferences implements IPreferences {
         save();
     }
 
+
+    @Override public void save(String key, int value) {
+        edit.putInt(key, value);
+        save();
+    }
+
+    @Override public void save(String key, String value) {
+        edit.putString(key, value);
+        save();
+    }
+
+    @Override public void save(String key, boolean value) {
+        edit.putBoolean(key, value);
+        save();
+    }
+
     /**
      * If you need to return a different default response then
      * override this method with yor implementation
@@ -67,6 +83,8 @@ public abstract class Preferences implements IPreferences {
      */
     @Override public String getString(Enum key) {return getString(key, "");}
 
+    @Override public String getString(String key) {return getString(key, "");}
+
 
     /**
      * Returns the value of the key or the default value
@@ -74,6 +92,9 @@ public abstract class Preferences implements IPreferences {
      * @return
      */
     protected String getString(Enum key, String defaultValue){return sharedPref.getString(key.name(), defaultValue);}
+
+
+    protected String getString(String key, String defaultValue){return sharedPref.getString(key, defaultValue);}
 
     /**
      * If you need to return a different default response then

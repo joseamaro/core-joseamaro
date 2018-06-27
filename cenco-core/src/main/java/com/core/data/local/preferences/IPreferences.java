@@ -11,7 +11,11 @@ public interface IPreferences {
     void save(Enum key, int value);
     void save(Enum key, String value);
     void save(Enum key, boolean value);
+    void save(String key, int value);
+    void save(String key, String value);
+    void save(String key, boolean value);
     int getInt(Enum key);
     String getString(Enum key);
+    String getString(String key);
     boolean getBool(Enum key);
 }
