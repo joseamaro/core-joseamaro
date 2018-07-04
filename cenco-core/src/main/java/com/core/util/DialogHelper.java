@@ -31,12 +31,41 @@ public class DialogHelper {
         showMessageDialog(text,R.string.default_title,positiveClickListener);
     }
 
+    public void showMessageDialogWitchTitle(String title,String text,DialogInterface.OnClickListener positiveClickListener) {
+        showMessageDialog(text,title,positiveClickListener);
+    }
+
     public void showErrorDialog(int idString) {
         showErrorDialog(context.getString(idString));
     }
 
     public void showErrorDialog(String text) {
         showMessageDialog(text, R.string.ups,null);
+    }
+
+    public void showMessageDialog(String text, String title, final DialogInterface.OnClickListener positiveClickListener) {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.cancel();
+            dialog = null;
+        }
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            dialog = builder.setCancelable(false)
+                    .setTitle(title)
+                    .setMessage(text)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(positiveClickListener!=null){
+                                positiveClickListener.onClick(dialog,0);
+                            }
+                            dialog.cancel();
+                        }
+                    }).create();
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void showMessageDialog(String text, @StringRes final int title, final DialogInterface.OnClickListener positiveClickListener) {
