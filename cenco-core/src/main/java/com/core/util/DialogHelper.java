@@ -24,7 +24,11 @@ public class DialogHelper {
     }
 
     public void showMessageDialog(String text) {
-        showMessageDialog(text,R.string.default_title);
+        showMessageDialog(text,R.string.default_title,null);
+    }
+
+    public void showMessageDialog(String text,DialogInterface.OnClickListener positiveClickListener) {
+        showMessageDialog(text,R.string.default_title,positiveClickListener);
     }
 
     public void showErrorDialog(int idString) {
@@ -32,10 +36,10 @@ public class DialogHelper {
     }
 
     public void showErrorDialog(String text) {
-        showMessageDialog(text, R.string.ups);
+        showMessageDialog(text, R.string.ups,null);
     }
 
-    public void showMessageDialog(String text, @StringRes int title) {
+    public void showMessageDialog(String text, @StringRes final int title, final DialogInterface.OnClickListener positiveClickListener) {
         if (dialog != null && dialog.isShowing()) {
             dialog.cancel();
             dialog = null;
@@ -48,6 +52,9 @@ public class DialogHelper {
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            if(positiveClickListener!=null){
+                                positiveClickListener.onClick(dialog,title);
+                            }
                             dialog.cancel();
                         }
                     }).create();
